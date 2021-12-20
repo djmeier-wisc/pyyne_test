@@ -2,7 +2,7 @@ As for the coding challenge, I I put one together I’m hoping you can look at.
 
 The challenge is to create a simple Java bank aggregation application that pulls information from multiple different banks and displays it. At the link, you can download some skeleton code I put together to base the solution on.
 
-https://drive.google.com/file/d/1jd8eTFRdXuLsxQcV78OMlD-18x05A8ip/view?usp=sharing
+<https://drive.google.com/file/d/1jd8eTFRdXuLsxQcV78OMlD-18x05A8ip/view?usp=sharing>
 
 As you will see, there are two packages, com.bank1 and com.bank2 which represent proprietary API integration points towards these two hypothetical banks. They only return hardcoded dummy values and ignores input parameters, but I want you to imagine that they represent wrappers for external API calls. They both expose functionality to fetch account balances and transactions, but in slightly different ways. Your solution may not alter these classes.
 

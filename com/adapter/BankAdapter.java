@@ -28,15 +28,15 @@ public class BankAdapter {
         this.bank2 = bank2;
     }
     /**
-     * Gets the summation of the balances of both bank accounts.
+     * Gets the balances of both bank accounts in the form of an array, with the first spot being for bank1's account and the second being for bank2.
      * 
      * @param bank1AccNum - The account number for bank1.
      * @param bank2AccNum = The account number for bank2.
-     * @return - The summation of both balances.
+     * @return An array containing both bank balances, with the first being bank1 and the second being bank2.
      * @exception DataFormatException - Indicates the bank account currencies do not
      *                                line up, so they cannot be added.
      */
-    public double getBalance(long bank1AccNum, long bank2AccNum) throws DataFormatException {
+    public double[] getBalances(long bank1AccNum, long bank2AccNum) throws DataFormatException {
         double bank1Balance = bank1.getAccountBalance(bank1AccNum);
         double bank2Balance = bank2.getBalance(bank2AccNum).getBalance();
 
@@ -44,7 +44,8 @@ public class BankAdapter {
         if (!currencyCheck(bank1AccNum, bank2AccNum)) {
             throw new DataFormatException("Bank1 and Bank2 do not share a common currency.");
         }
-        return bank1Balance + bank2Balance;
+
+        return new double[]{bank1Balance, bank2Balance};
     }
 
     /**

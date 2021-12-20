@@ -44,9 +44,11 @@ public class BankAdapterTest {
      */
     @Test
     public void testGetBalance() throws DataFormatException {
-        double calcSumBalance = adapter.getBalance(BANK_1_ACC_NUM, BANK_2_ACC_NUM);
-        double actualBalance = bank1.getAccountBalance(BANK_1_ACC_NUM) + bank2.getBalance(BANK_2_ACC_NUM).getBalance();
-        assertTrue("Incorrect balance sum!", calcSumBalance == actualBalance);
+        double[] calcSumBalances = adapter.getBalances(BANK_1_ACC_NUM, BANK_2_ACC_NUM);
+        double[] actualBalances = new double[] { bank1.getAccountBalance(BANK_1_ACC_NUM),
+                bank2.getBalance(BANK_2_ACC_NUM).getBalance() };
+        assertTrue("bank1 has incorrect balance!", calcSumBalances[0] == actualBalances[0]);
+        assertTrue("bank2 has incorrect balance!", calcSumBalances[1] == actualBalances[1]);
     }
 
     /**

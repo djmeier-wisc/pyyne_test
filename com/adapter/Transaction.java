@@ -91,4 +91,9 @@ public class Transaction implements Comparable<Transaction> {
         return (int) (this.getAmount() - t2.getAmount()) + this.getText().compareTo(t2.getText())
                 + (this.getType() == t2.getType() ? 0 : 1);
     }
+
+    @Override
+    public String toString() {
+        return "Transaction [amount=" + amount + ", text=" + text + ", type=" + type + "]";
+    }
 }
