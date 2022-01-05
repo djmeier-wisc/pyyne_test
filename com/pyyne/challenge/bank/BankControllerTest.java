@@ -2,18 +2,15 @@ package com.pyyne.challenge.bank;
 
 import static org.junit.Assert.assertTrue;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.lang.reflect.Array;
 import java.util.Date;
 import java.util.List;
 import java.util.zip.DataFormatException;
 
-import com.adapter.BankAdapter;
-import com.adapter.Transaction;
-import com.adapter.Transaction.TRANSACTION_TYPES;
+import com.bank.Transaction;
+import com.bank.Transaction.TRANSACTION_TYPES;
 import com.bank1.integration.Bank1AccountSource;
 import com.bank2.integration.Bank2AccountSource;
 
