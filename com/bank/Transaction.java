@@ -1,4 +1,4 @@
-package com.adapter;
+package com.bank;
 
 /**
  * A class to capture information about transactions for bank1 and bank2.
