@@ -73,12 +73,10 @@ public class Transaction implements Comparable<Transaction> {
     }
 
     /**
-     * Compares different transactions, with regard to amount, text, and type.
+     * Compares different transactions, with regard to amount only.
      * 
-     * @note - 1 point is added if the type of transactions are not equal.
      * @param o - The object upon which the transaction will be compared.
-     * @return - The difference between teh amount, summed with the difference in
-     *         text, summed with either 0 or 1 for the type of transaction.
+     * @return - The difference between the amounts of the two transactions.
      */
     @Override
     public int compareTo(Transaction o) {
@@ -88,8 +86,7 @@ public class Transaction implements Comparable<Transaction> {
             return -1;
         Transaction t2 = (Transaction) o;
 
-        return (int) (this.getAmount() - t2.getAmount()) + this.getText().compareTo(t2.getText())
-                + (this.getType() == t2.getType() ? 0 : 1);
+        return (int) (this.getAmount() - t2.getAmount());
     }
 
     @Override
