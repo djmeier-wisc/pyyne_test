@@ -1,13 +1,14 @@
 package com.bank;
 
-import com.bank2.integration.Bank2AccountTransaction;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.bank2.integration.Bank2AccountBalance;
 import com.bank2.integration.Bank2AccountSource;
+import com.bank2.integration.Bank2AccountTransaction;
+
+
 
 /**
  * An adaptor to convert Bank1AccountSource object into the type Bank.
@@ -35,7 +36,8 @@ public class Bank2Adaptor implements Bank {
      * @return The currency of accountID.
      */
     public String getCurrency(long accountID) {
-        return oldBank.getBalance(accountID).getCurrency();
+        Bank2AccountBalance balance =  oldBank.getBalance(accountID);
+        return balance.getCurrency();
     }
 
     /**

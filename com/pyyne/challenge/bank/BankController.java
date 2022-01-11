@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.zip.DataFormatException;
 
-import com.adapter.BankAdapter;
 import com.bank.Transaction;
 import com.bank.Transaction.TRANSACTION_TYPES;
 import com.bank1.integration.Bank1AccountSource;
@@ -39,7 +38,7 @@ public class BankController {
      */
     public void printBalances(long bank1ID, long bank2ID) {
         System.out.printf("Bank1: %.2f %s\n", bank1Account.getBalance(bank1ID), bank2Account.getCurrency(bank1ID));
-        System.out.printf("Bank2: %.2 %sf\n", bank2Account.getBalance(bank2ID), bank2Account.getCurrency(bank2ID));
+        System.out.printf("Bank2: %.2f %s\n", bank2Account.getBalance(bank2ID), bank2Account.getCurrency(bank2ID));
     }
 
     /**
@@ -61,11 +60,5 @@ public class BankController {
             System.out.format("|%-10s|%-20s|%-10s|\n", tTypeText, t.getText(),
                     t.getAmount());
         }
-    }
-
-    public static void main(String[] args) {
-        BankController bc = new BankController();
-        bc.printBalances(0L, 0L);
-        bc.printTransactions(0L, 0L, new Date(), new Date());
     }
 }
