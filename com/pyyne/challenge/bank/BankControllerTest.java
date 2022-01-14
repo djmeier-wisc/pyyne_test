@@ -9,6 +9,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.zip.DataFormatException;
 
+import com.bank.Bank;
+import com.bank.Bank1Adapter;
+import com.bank.Bank2Adaptor;
 import com.bank.Transaction;
 import com.bank.Transaction.TRANSACTION_TYPES;
 import com.bank1.integration.Bank1AccountSource;
@@ -21,10 +24,10 @@ import org.junit.Test;
 public class BankControllerTest {
     PrintStream prevConsole;
     ByteArrayOutputStream newConsole;
-    BankAdapter bankAdapter;
     long BANK_1_ACC_NUM;
     long BANK_2_ACC_NUM;
-
+    Bank bank1;
+    Bank bank2;
 
     @Before
     public void setup() {
@@ -36,7 +39,8 @@ public class BankControllerTest {
         BANK_1_ACC_NUM = 0L;
         BANK_2_ACC_NUM = 0L;
 
-        bankAdapter = new BankAdapter(new Bank1AccountSource(), new Bank2AccountSource());
+        bank1 = new Bank1Adapter(new Bank1AccountSource());
+        bank2 = new Bank2Adaptor(new Bank2AccountSource());
     }
 
     @After
@@ -52,24 +56,26 @@ public class BankControllerTest {
 
     @Test
     public void testPrintBalances() throws DataFormatException {
-        BankController bank = new BankController(BANK_1_ACC_NUM, BANK_2_ACC_NUM);
-        bank.printBalances();
+        BankController bank = new BankController();
+        bank.printBalances(BANK_1_ACC_NUM, BANK_2_ACC_NUM);
 
         String outputString = newConsole.toString();
-        double accBalances[] = bankAdapter.getBalances(BANK_1_ACC_NUM, BANK_2_ACC_NUM);
 
-        assertTrue("Output string didn't contain bank1's balance!", outputString.contains(String.valueOf(accBalances[0])));
-        assertTrue("Output string didn't contain bank2's balance!", outputString.contains(String.valueOf(accBalances[1])));
+        assertTrue("Output string didn't contain bank1's balance!", outputString.contains(String.valueOf(bank1.getBalance(BANK_1_ACC_NUM))));
+        assertTrue("Output string didn't contain bank2's balance!", outputString.contains(String.valueOf(bank2.getBalance(BANK_2_ACC_NUM))));
     }
 
     @Test
     public void testPrintTransactions() {
-        BankController bank = new BankController(BANK_1_ACC_NUM, BANK_2_ACC_NUM);
-        bank.printTransactions();
+        BankController bank = new BankController();
+        Date startDate = new Date();
+        Date endDate = new Date();
+        bank.printTransactions(BANK_1_ACC_NUM, BANK_2_ACC_NUM, startDate, endDate);
 
         String outputString = newConsole.toString();
 
-        List<Transaction> transactions = bankAdapter.getTransactions(BANK_1_ACC_NUM, BANK_2_ACC_NUM, new Date(), new Date());
+        List<Transaction> transactions = bank1.getTransactions(BANK_1_ACC_NUM, startDate, endDate);
+        transactions.addAll(bank2.getTransactions(BANK_2_ACC_NUM, startDate, endDate));
 
         for (Transaction t : transactions) {
             String tTypeText = t.getType() == TRANSACTION_TYPES.DEBIT ? "DEBIT" : "CREDIT";
